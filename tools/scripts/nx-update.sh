@@ -103,7 +103,7 @@ function installUpdates {
       pnpm update \
         @nrwl/devkit@${version} \
         @nrwl/js@${version} && \
-        cd packages/nx-mesh && \
+        cd packages/nx-ngrok && \
         pnpm update \
           @nrwl/cypress@^${version} \
           @nrwl/devkit@^${version} \
@@ -131,9 +131,9 @@ function runMigrations {
 function testUpdate {
   if [ $exitCode == 0 ]; then
     pnpm nx-cloud record -- nx format:write --skip-nx-cache && \
-      pnpm nx run nx-mesh:lint --fix --skip-nx-cache && \
-      pnpm nx run nx-mesh:build --skip-nx-cache && \
-      pnpm nx run nx-mesh:test --skip-nx-cache
+      pnpm nx run nx-ngrok:lint --fix --skip-nx-cache && \
+      pnpm nx run nx-ngrok:build --skip-nx-cache && \
+      pnpm nx run nx-ngrok:test --skip-nx-cache
 
     exitCode=$?
   fi

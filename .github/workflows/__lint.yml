@@ -1,0 +1,92 @@
+name: 'Lint'
+
+on:
+  workflow_call:
+    inputs:
+      affected:
+        description: >
+          Run for affected projects.
+        required: false
+        default: true
+        type: boolean
+      node_version:
+        description: >
+          Optionally define the version of Node to install.
+        required: false
+        default: 'lts/*'
+        type: string
+      save_cache:
+        description: >
+          Should the cache be saved upon completion?
+        required: false
+        default: false
+        type: boolean
+    outputs:
+      isNxNgrokAffected:
+        description: >
+          Is the nx-ngrok lib affected?
+        value: ${{ jobs.lint.outputs.isNxNgrokAffected }}
+      hasAffected:
+        description: >
+          Are there affected apps or libs?
+        value: ${{ jobs.lint.outputs.hasAffected }}
+      hasAffectedApps:
+        description: >
+          Are there affected apps?
+        value: ${{ jobs.lint.outputs.hasAffectedApps }}
+      hasAffectedLibs:
+        description: >
+          Are there affected libs?
+        value: ${{ jobs.lint.outputs.hasAffectedLibs }}
+    secrets:
+      NX_CLOUD_ACCESS_TOKEN:
+        description: 'The NX Cloud API token'
+        required: true
+
+concurrency:
+  group: lint--${{ github.workflow }}--${{ github.ref }}
+
+env:
+  NX_CLOUD_ACCESS_TOKEN: ${{ secrets.NX_CLOUD_ACCESS_TOKEN }}
+
+jobs:
+  lint:
+    name: Lint & Prettier
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    outputs:
+      isNxNgrokAffected: ${{ contains(steps.setup.outputs.affectedLibs, 'nx-ngrok') }}
+      hasAffected: ${{ steps.setup.outputs.hasAffected }}
+      hasAffectedApps: ${{ steps.setup.outputs.hasAffectedApps }}
+      hasAffectedLibs: ${{ steps.setup.outputs.hasAffectedLibs }}
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Setup Job
+        id: setup
+        uses: ./.github/actions/setup-job
+        with:
+          node_version: ${{ inputs.node_version }}
+          save_cache: '${{ inputs.save_cache }}'
+
+      - name: Format
+        run: |
+          pnpm nx-cloud record -- npx nx format:check
+
+      - name: Affected Lint
+        if: inputs.affected == true
+        run: |
+          pnpm nx affected \
+            --target=lint \
+            --parallel=4
+
+      - name: Lint
+        if: inputs.affected != true
+        run: |
+          pnpm nx run-many \
+            --target=lint \
+            --parallel=4 \
+            --all

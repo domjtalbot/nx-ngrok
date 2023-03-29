@@ -1,0 +1,75 @@
+name: 'Pull Request'
+
+on:
+  pull_request:
+
+  workflow_dispatch:
+
+concurrency:
+  group: pull-request--${{ github.workflow }}--${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  NX_CLOUD_ACCESS_TOKEN: ${{ secrets.NX_CLOUD_ACCESS_TOKEN }}
+
+jobs:
+  lint:
+    uses: ./.github/workflows/__lint.yml
+    secrets: inherit
+    with:
+      affected: true
+      node_version: 'lts/*'
+      save_cache: true
+
+  build:
+    needs: [lint]
+    if: needs.lint.outputs.hasAffected == 'true'
+    uses: ./.github/workflows/__build.yml
+    secrets: inherit
+    strategy:
+      matrix:
+        node_version: ['lts/*', latest]
+    with:
+      affected: true
+      node_version: ${{ matrix.node_version }}
+      save_cache: ${{ matrix.node_version == 'latest' }}
+
+  test:
+    needs: [lint, build]
+    if: needs.lint.outputs.hasAffected == 'true'
+    uses: ./.github/workflows/__test.yml
+    secrets: inherit
+    strategy:
+      matrix:
+        node_version: ['lts/*', latest]
+    with:
+      affected: true
+      node_version: ${{ matrix.node_version }}
+
+  e2e:
+    needs: [lint, build]
+    if: needs.lint.outputs.hasAffectedApps == 'true'
+    uses: ./.github/workflows/__e2e.yml
+    secrets: inherit
+    strategy:
+      matrix:
+        node_version: ['lts/*', latest]
+    with:
+      affected: true
+      node_version: ${{ matrix.node_version }}
+
+  code-analysis:
+    needs: [lint, build, test, e2e]
+    name: Code Analysis
+    uses: ./.github/workflows/code-analysis.yml
+    secrets: inherit
+
+  changesets:
+    needs: [lint, build, test, e2e]
+    name: Changesets
+    uses: ./.github/workflows/__changesets.yml
+    secrets: inherit
+    with:
+      affected: true
+      snapshot: true
+      snapshot_tag: alpha

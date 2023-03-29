@@ -1,0 +1,221 @@
+# TODO
+# Add affected e2e apps for matrix output
+
+name: 'NX affected'
+description: 'Get Nx affected info'
+inputs:
+  affected-per-agent:
+    description: How many affected apps or libraries per agent
+    required: false
+    default: '2'
+  min-required-agents:
+    description: The minimum number of agents required to trigger a matrix.
+    required: false
+    default: '1'
+  max-agents:
+    description: The maximum number of agents to spawn
+    required: false
+    default: '4'
+
+outputs:
+  apps:
+    description: 'All apps'
+    value: ${{ steps.affected.outputs.apps }}
+
+  e2eApps:
+    description: 'All E2E apps'
+    value: ${{ steps.affected.outputs.e2eApps }}
+
+  nonE2EApps:
+    description: 'All Non-E2E apps'
+    value: ${{ steps.affected.outputs.nonE2EApps }}
+
+  libs:
+    description: 'All libs'
+    value: ${{ steps.affected.outputs.libs }}
+
+  numberOfApps:
+    description: 'The number of apps'
+    value: ${{ steps.affected.outputs.numberOfApps }}
+
+  numberOfE2eApps:
+    description: 'The number of E2E apps'
+    value: ${{ steps.affected.outputs.numberOfE2eApps }}
+
+  numberOfNonE2EApps:
+    description: 'The number of non-e2e apps'
+    value: ${{ steps.affected.outputs.numberOfNonE2EApps }}
+
+  numberOfLibs:
+    description: 'The number of libs'
+    value: ${{ steps.affected.outputs.numberOfLibs }}
+
+  hasApps:
+    description: 'Are there apps?'
+    value: ${{ steps.affected.outputs.hasApps }}
+
+  hasE2EApps:
+    description: 'Are there E2E apps?'
+    value: ${{ steps.affected.outputs.hasE2EApps }}
+
+  hasNonE2EApps:
+    description: 'Are there non-e2e apps?'
+    value: ${{ steps.affected.outputs.hasNonE2EApps }}
+
+  hasLibs:
+    description: 'Are there libs?'
+    value: ${{ steps.affected.outputs.hasLibs }}
+
+  hasProjects:
+    description: 'Are there apps or libs?'
+    value: ${{ steps.affected.outputs.hasProjects }}
+
+  affectedApps:
+    description: 'Affected apps'
+    value: ${{ steps.affected.outputs.affectedApps }}
+
+  affectedE2eApps:
+    description: 'Affected E2E apps'
+    value: ${{ steps.affected.outputs.affectedE2eApps }}
+
+  affectedNonE2EApps:
+    description: 'Affected non-e2e apps'
+    value: ${{ steps.affected.outputs.affectedNonE2EApps }}
+
+  affectedLibs:
+    description: 'Affected libs'
+    value: ${{ steps.affected.outputs.affectedLibs }}
+
+  numberOfAffectedApps:
+    description: 'The number of affected apps'
+    value: ${{ steps.affected.outputs.numberOfAffectedApps }}
+
+  numberOfAffectedE2eApps:
+    description: 'The number of affected E2E apps'
+    value: ${{ steps.affected.outputs.numberOfAffectedE2eApps }}
+
+  numberOfAffectedNonE2EApps:
+    description: 'The number of affected non-E2E apps'
+    value: ${{ steps.affected.outputs.numberOfAffectedNonE2EApps }}
+
+  numberOfAffectedLibs:
+    description: 'The number of affected libs'
+    value: ${{ steps.affected.outputs.numberOfAffectedLibs }}
+
+  hasAffectedApps:
+    description: 'Are there affected apps?'
+    value: ${{ steps.affected.outputs.hasAffectedApps }}
+
+  hasAffectedE2EApps:
+    description: 'Are there affected E2E apps?'
+    value: ${{ steps.affected.outputs.hasAffectedE2EApps }}
+
+  hasAffectedNonE2EApps:
+    description: 'Are there affected non-e2e apps?'
+    value: ${{ steps.affected.outputs.hasAffectedNonE2EApps }}
+
+  hasAffectedLibs:
+    description: 'Are there affected libs?'
+    value: ${{ steps.affected.outputs.hasAffectedLibs }}
+
+  hasAffected:
+    description: 'Are there affected apps or libs?'
+    value: ${{ steps.affected.outputs.hasAffected }}
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Process parallel commands configuration
+      uses: actions/github-script@d556feaca394842dc55e4734bf3bb9f685482fa0 # v6
+      id: affected
+      with:
+        script: |
+          const { exec: nodeExec } = require('child_process');
+          const { promisify } = require('util');
+          const execAsync = promisify(nodeExec);
+
+          /**
+           *
+           * @param {'app' | 'lib' | 'e2e'} type
+           * @returns string array
+           */
+          const getProjects = async (type, affected = false) => {
+            let config = `--type=${type} --select=projects`;
+
+            if (type === 'e2e') {
+              config = `--type=app --select=projectGraph.nodes`;
+            }
+
+            const { stdout } = await execAsync(
+              `npx nx print-affected ${config} --all=${!affected}`
+            );
+
+            let all = stdout
+              .replace(/\n/g, ' ')
+              .trim()
+              .split(', ')
+              .filter((project) => project !== '');
+
+            if (type === 'e2e') {
+              if (affected) {
+                const apps = await getProjects('app', true);
+
+                let affectedE2e = [];
+                apps.forEach((app) => {
+                  if (all.includes(`${app}-e2e`)) {
+                    affectedE2e.push(`${app}-e2e`);
+                  }
+                });
+
+                all = affectedE2e;
+              } else {
+                all = all.filter((node) => node.endsWith('-e2e'));
+              }
+            }
+
+            return all;
+          };
+
+          (async () => {
+            const apps = await getProjects('app');
+            const libs = await getProjects('lib');
+            const e2e = await getProjects('e2e');
+            const affectedApps = await getProjects('app', true);
+            const affectedLibs = await getProjects('lib', true);
+            const affectedE2e = await getProjects('e2e', true);
+
+            let info = {
+              apps: JSON.stringify(apps),
+              e2eApps: JSON.stringify(e2e),
+              nonE2EApps: JSON.stringify(apps),
+              libs: JSON.stringify(libs),
+              numberOfApps: apps.length,
+              numberOfE2eApps: e2e.length,
+              numberOfNonE2EApps: apps.length,
+              numberOfLibs: libs.length,
+              hasApps: apps.length > 0,
+              hasE2EApps: e2e.length > 0,
+              hasNonE2EApps: apps.length > 0,
+              hasLibs: libs.length > 0,
+              hasProjects: apps.length > 0 || libs.length > 0,
+              affectedApps: JSON.stringify(affectedApps),
+              affectedE2eApps: JSON.stringify(affectedE2e),
+              affectedNonE2EApps: JSON.stringify(affectedApps),
+              affectedLibs: JSON.stringify(affectedLibs),
+              numberOfAffectedApps: affectedApps.length,
+              numberOfAffectedE2eApps: affectedE2e.length,
+              numberOfAffectedNonE2EApps: affectedApps.length,
+              numberOfAffectedLibs: affectedLibs.length,
+              hasAffectedApps: affectedApps.length > 0,
+              hasAffectedE2EApps: affectedE2e.length > 0,
+              hasAffectedNonE2EApps: affectedApps.length > 0,
+              hasAffectedLibs: affectedLibs.length > 0,
+              hasAffected: affectedApps.length > 0 || affectedLibs.length > 0,
+            };
+
+            console.log(info);
+
+            Object.entries(info).forEach(([name, value]) => {
+              core.setOutput(name, value);
+            });
+          })();

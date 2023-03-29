@@ -1,0 +1,62 @@
+name: 'Code Analysis - Sonar'
+
+on:
+  workflow_call:
+    secrets:
+      NX_CLOUD_ACCESS_TOKEN:
+        description: 'The NX Cloud API token'
+        required: true
+
+concurrency:
+  group: code-analysis--sonar-${{ github.workflow }}-${{ github.ref }}
+
+env:
+  NX_CLOUD_ACCESS_TOKEN: ${{ secrets.NX_CLOUD_ACCESS_TOKEN }}
+
+jobs:
+  sonar:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@ac593985615ec2ede58e132d2e21d2b1cbd6127c # v3
+        with:
+          fetch-depth: 0
+
+      - name: Setup Job
+        uses: ./.github/actions/setup-job
+        with:
+          node_version: 'lts/*'
+
+      - name: Lint Reports
+        shell: bash
+        run: |
+          pnpm nx run-many \
+            --target=lint \
+            --parallel=4 \
+            --all \
+            --configuration=reports
+
+      - name: Test Reports
+        shell: bash
+        run: |
+          pnpm nx run-many \
+            --target=test \
+            --parallel=3 \
+            --all \
+            --configuration=reports
+
+      - name: Get Nx-ngrok version
+        id: version
+        uses: notiz-dev/github-action-json-property@a5a9c668b16513c737c3e1f8956772c99c73f6e8 # v0.2.0
+        with:
+          path: 'packages/nx-ngrok/package.json'
+          prop_path: 'version'
+
+      - name: SonarCloud Scan
+        uses: sonarsource/sonarcloud-github-action@cb201f3b2d7a38231a8c042dfea4539c8bea180b # v1.8
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        with:
+          args: >
+            -Dsonar.projectVersion=${{ steps.version.outputs.prop }}

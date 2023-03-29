@@ -1,0 +1,98 @@
+name: 'Build'
+
+on:
+  workflow_call:
+    inputs:
+      affected:
+        description: >
+          Run for affected projects.
+        required: false
+        default: true
+        type: boolean
+      node_version:
+        description: >
+          Optionally define the version of Node to install.
+        required: false
+        default: 'lts/*'
+        type: string
+      save_cache:
+        description: >
+          Should the cache be saved upon completion?
+        required: false
+        default: false
+        type: boolean
+    secrets:
+      NX_CLOUD_ACCESS_TOKEN:
+        description: 'The NX Cloud API token'
+        required: true
+
+concurrency:
+  group: build--${{ github.workflow }}--${{ github.ref }}--node-${{ inputs.node_version }}--affected-${{ inputs.affected }}--save_cache-${{ inputs.save_cache }}
+
+env:
+  NX_CLOUD_ACCESS_TOKEN: ${{ secrets.NX_CLOUD_ACCESS_TOKEN }}
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Setup Job
+        uses: ./.github/actions/setup-job
+        with:
+          node_version: ${{ inputs.node_version }}
+          save_cache: '${{ inputs.save_cache }}'
+
+      - name: Affected Build
+        if: inputs.affected == true
+        run: |
+          pnpm nx affected \
+            --target=build \
+            --parallel=2
+
+      - name: Build
+        if: inputs.affected != true
+        run: |
+          pnpm nx run-many \
+            --target=build \
+            --parallel=2 \
+            --all
+
+      - name: Affected Production Build
+        if: inputs.affected == true
+        run: |
+          pnpm nx affected \
+            --target=build \
+            --parallel=2 \
+            --configuration=production
+
+      - name: Build Production
+        if: inputs.affected != true
+        run: |
+          pnpm nx run-many \
+            --target=build \
+            --parallel=2 \
+            --all \
+            --configuration=production
+
+      - name: Create build artifact tar
+        if: inputs.node_version == 'lts'
+        shell: bash
+        run: |
+          cd dist/packages
+          tar cvzf nx-ngrok.tar.gz nx-ngrok
+          mv nx-ngrok.tar.gz ../../
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v3
+        if: inputs.node_version == 'lts'
+        with:
+          name: nx-ngrok
+          retention-days: 2
+          path: |
+            nx-ngrok.tar.gz
