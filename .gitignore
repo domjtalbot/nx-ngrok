@@ -34,6 +34,7 @@ reports
 
 .env.*.local
 .env.local
+nx-cloud.env
 !.env
 !.env.development
 !.env.production
