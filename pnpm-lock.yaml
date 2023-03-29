@@ -59,6 +59,9 @@ importers:
       '@nrwl/nx-cloud':
         specifier: latest
         version: 15.3.3
+      '@nrwl/nx-plugin':
+        specifier: 15.7.1
+        version: 15.7.1(@types/node@18.11.9)(eslint@8.15.0)(nx@15.7.1)(prettier@2.6.2)(ts-node@10.9.1)(typescript@4.8.2)
       '@nrwl/react':
         specifier: 15.7.1
         version: 15.7.1(eslint@8.15.0)(nx@15.7.1)(prettier@2.6.2)(typescript@4.8.2)
@@ -2579,6 +2582,31 @@ packages:
     os: [linux]
     requiresBuild: true
     optional: true
+
+  /@nrwl/nx-plugin@15.7.1(@types/node@18.11.9)(eslint@8.15.0)(nx@15.7.1)(prettier@2.6.2)(ts-node@10.9.1)(typescript@4.8.2):
+    resolution: {integrity: sha512-lMDdw8gmSafG8bnokHz8VDRWvalimjCAPLJi7lsYhJFKf9xRYsiPmSJhznDCTR8cYaB3X+46RyD17i2AAWwAnA==}
+    dependencies:
+      '@nrwl/devkit': 15.7.1(nx@15.7.1)(typescript@4.8.2)
+      '@nrwl/jest': 15.7.1(@types/node@18.11.9)(nx@15.7.1)(ts-node@10.9.1)(typescript@4.8.2)
+      '@nrwl/js': 15.7.1(eslint@8.15.0)(nx@15.7.1)(prettier@2.6.2)(typescript@4.8.2)
+      '@nrwl/linter': 15.7.1(eslint@8.15.0)(nx@15.7.1)(typescript@4.8.2)
+      dotenv: 10.0.0
+      fs-extra: 11.1.1
+      tslib: 2.5.0
+    transitivePeerDependencies:
+      - '@babel/traverse'
+      - '@swc-node/register'
+      - '@swc/core'
+      - '@types/node'
+      - debug
+      - eslint
+      - node-notifier
+      - nx
+      - prettier
+      - supports-color
+      - ts-node
+      - typescript
+    dev: true
 
   /@nrwl/nx-win32-arm64-msvc@15.7.1:
     resolution: {integrity: sha512-JEhy0ac+ivhIdAPWqEfAN9EqFznKA5vt4oVjIqjDysqgzN9GBKOeo7gphdii9WyqrIKEbOs1L++ADWXw1gev6Q==}
