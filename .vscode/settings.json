@@ -1,0 +1,7 @@
+{
+  "eslint.validate": ["json"],
+  "sonarlint.connectedMode.project": {
+    "connectionId": "domjtalbot",
+    "projectKey": "domjtalbot_nx-ngrok"
+  }
+}
