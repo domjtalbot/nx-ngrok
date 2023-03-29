@@ -1,0 +1,40 @@
+{
+  "name": "nx-ngrok",
+  "author": "Dom Talbot",
+  "description": "Ngrok support for Nx",
+  "version": "0.0.0",
+  "license": "MIT",
+  "main": "src/index.js",
+  "generators": "./generators.json",
+  "executors": "./executors.json",
+  "peerDependencies": {
+    "nx": ">=15.7.1"
+  },
+  "dependencies": {},
+  "keywords": [
+    "CLI",
+    "Monorepo",
+    "Ngrok",
+    "Node",
+    "Nx"
+  ],
+  "bugs": {
+    "url": "git://github.com/domjtalbot/nx-ngrok/issues"
+  },
+  "repository": {
+    "directory": "packages/nx-ngrok",
+    "type": "git",
+    "url": "git://github.com/domjtalbot/nx-ngrok.git"
+  },
+  "funding": {
+    "type": "GitHub",
+    "url": "https://github.com/sponsors/domjtalbot"
+  },
+  "nx-migrations": {
+    "migrations": "./migrations.json"
+  },
+  "exports": {
+    "./package.json": "./package.json"
+  },
+  "type": "commonjs"
+}
