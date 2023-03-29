@@ -10,6 +10,9 @@
     "nx:update": "./tools/scripts/nx-update.sh",
     "test": "nx run-many --target=test --all"
   },
+  "engines": {
+    "pnpm": ">=7"
+  },
   "private": true,
   "dependencies": {
     "@commitlint/cli": "^17.5.1",
