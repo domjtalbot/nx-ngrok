@@ -1,0 +1,15 @@
+{
+  "$schema": "https://unpkg.com/@changesets/config@2.3.0/schema.json",
+  "access": "public",
+  "baseBranch": "main",
+  "changelog": [
+    "@changesets/changelog-github",
+    { "repo": "domjtalbot/nx-ngrok" }
+  ],
+  "commit": false,
+  "fixed": [["nx-ngrok", "*"]],
+  "ignore": [],
+  "linked": [],
+  "snapshot": { "useCalculatedVersion": true },
+  "updateInternalDependencies": "patch"
+}
