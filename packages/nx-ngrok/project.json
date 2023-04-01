@@ -25,9 +25,7 @@
           "outExtension": { ".js": ".js" }
         },
         "sourcemap": true,
-        "additionalEntryPoints": [
-          "packages/nx-ngrok/src/executors/build/build.ts"
-        ],
+        "additionalEntryPoints": [],
         "external": [],
         "assets": [
           {
