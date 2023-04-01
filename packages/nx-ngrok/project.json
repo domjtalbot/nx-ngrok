@@ -5,10 +5,77 @@
   "projectType": "library",
   "targets": {
     "build": {
-      "executor": "@nrwl/vite:build",
-      "outputs": ["{options.outputPath}"],
+      "executor": "nx:run-commands",
       "options": {
-        "outputPath": "dist/packages/nx-ngrok"
+        "command": "rm -rf dist/packages/nx-ngrok/node_modules dist/packages/nx-ngrok/src/package.json"
+      },
+      "dependsOn": ["build-bundle"]
+    },
+    "build-bundle": {
+      "executor": "@nrwl/esbuild:esbuild",
+      "outputs": ["dist/packages/nx-ngrok"],
+      "options": {
+        "outputPath": "dist/packages/nx-ngrok/src",
+        "main": "packages/nx-ngrok/src/index.ts",
+        "tsConfig": "packages/nx-ngrok/tsconfig.lib.json",
+        "deleteOutputPath": false,
+        "format": ["cjs"],
+        "minify": true,
+        "esbuildOptions": {
+          "outExtension": { ".js": ".js" }
+        },
+        "sourcemap": true,
+        "additionalEntryPoints": [
+          "packages/nx-ngrok/src/executors/build/build.ts"
+        ],
+        "external": [],
+        "assets": [
+          {
+            "input": ".",
+            "glob": "(README.md|CHANGELOG.md|LICENSE)",
+            "output": "../"
+          },
+          {
+            "input": "packages/nx-ngrok",
+            "glob": "*.md",
+            "output": "../"
+          },
+          {
+            "input": "./packages/nx-ngrok/src",
+            "glob": "**/!(*.ts|*.snap)",
+            "output": "."
+          },
+          {
+            "input": "./packages/nx-ngrok/src",
+            "glob": "**/*.d.ts",
+            "output": "."
+          },
+          {
+            "input": "./packages/nx-ngrok",
+            "glob": "(generators|executors|migrations|package).json",
+            "output": "../"
+          }
+        ]
+      },
+      "dependsOn": ["build-non-bundle-cleanup"]
+    },
+    "build-non-bundle-cleanup": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "rm -rf dist/packages/nx-ngrok/node_modules dist/packages/nx-ngrok/src/executors dist/packages/nx-ngrok/src/migrations dist/packages/nx-ngrok/src/index.js dist/packages/nx-ngrok/src/index.cjs"
+      },
+      "dependsOn": ["build-non-bundle"]
+    },
+    "build-non-bundle": {
+      "executor": "@nrwl/js:tsc",
+      "outputs": [
+        "dist/packages/nx-ngrok/generators",
+        "dist/packages/nx-ngrok/utils"
+      ],
+      "options": {
+        "outputPath": "dist/packages/nx-ngrok",
+        "main": "packages/nx-ngrok/src/generators/index.ts",
+        "tsConfig": "packages/nx-ngrok/tsconfig.lib.json"
       }
     },
     "lint": {
