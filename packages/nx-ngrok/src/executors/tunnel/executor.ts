@@ -29,6 +29,9 @@ export async function* tunnelExecutor(
         proto: options.protocol,
         region: options.region,
         subdomain: options.subdomain,
+        // onLogEvent: (log) => {
+        //   logger.debug(chalk.dim(`${chalk.yellow('ngrok')} - log - ${log}`));
+        // },
       });
 
       webInterfaceUrl = ngrok.getUrl();
