@@ -108,6 +108,7 @@ Start a new Ngrok tunnel.
 
 | Name    | Path                                                                                          |
 | ------- | --------------------------------------------------------------------------------------------- |
+| nest    | [examples/nest](https://github.com/domjtalbot/nx-ngrok/tree/main/examples/nest)               |
 | nextjs  | [examples/nextjs](https://github.com/domjtalbot/nx-ngrok/tree/main/examples/nextjs)           |
 | nx-mesh | [examples/nx-mesh-app](https://github.com/domjtalbot/nx-ngrok/tree/main/examples/nx-mesh-app) |
 

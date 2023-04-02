@@ -21,6 +21,8 @@ export async function* tunnelExecutor(
     logger.info(`[ ${chalk.yellow.bold('ngrok')} ]`);
 
     try {
+      console.log('serverValues', serverValues);
+
       tunnelUrl = await ngrok.connect({
         addr: serverValues.baseUrl,
         auth: options.auth,
