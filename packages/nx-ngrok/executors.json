@@ -1,4 +1,10 @@
 {
   "$schema": "http://json-schema.org/schema",
-  "executors": {}
+  "executors": {
+    "tunnel": {
+      "implementation": "./src/executors/tunnel/executor",
+      "schema": "./src/executors/tunnel/schema.json",
+      "description": "Start a tunnel for use with a tunnel-group backend"
+    }
+  }
 }

@@ -25,7 +25,9 @@
 
 - [Features](#features)
 - [Installing](#installing)
-  - [Peer Dependencies](#peer-dependencies)
+- [Executors](#executors)
+  - [`tunnel`](#tunnel)
+- [Examples](#examples)
 - [Compatibility](#compatibility)
 - [Credits](#credits)
 
@@ -33,17 +35,13 @@
 
 ## Features
 
-- TBC
+- Use Ngrok to create a secure tunnel to your applications.
+- Manually define the tunnel settings.
+- Alternatively, let Ngrok wrap your existing targets to automatically read the server URL.
 
 <br/>
 
 ## Installing
-
-Using [npm](https://npmjs.com):
-
-```bash
-npm install -D nx-ngrok
-```
 
 Using [pnpm](http://pnpm.io):
 
@@ -51,17 +49,68 @@ Using [pnpm](http://pnpm.io):
 pnpm add -D nx-ngrok
 ```
 
-Using [yarn](http://yarnpkg.com):
+<details>
+  <summary>Using npm</summary>
+
+```bash
+npm install -D nx-ngrok
+```
+
+</details>
+
+<details>
+  <summary>Using yarn</summary>
 
 ```bash
 yarn add -D nx-ngrok
 ```
 
-### Peer Dependencies
+</details>
 
-| Name    | Version   | Required |
-| ------- | --------- | :------: |
-| `ngrok` | `>=3.0.0` |    ✅    |
+<br/>
+
+## Executors
+
+### `tunnel`
+
+Start a new Ngrok tunnel.
+
+```json
+"targets": {
+  "dev": {
+    "executor": "nx-ngrok:tunnel",
+    "options": {
+      "serverTarget": "examples-nextjs:serve",
+    },
+  },
+}
+```
+
+<details>
+  <summary>tunnel executor options</summary>
+
+| Name           | Type                                     | Required | Default | Description                                                                                              |
+| -------------- | ---------------------------------------- | :------: | ------- | -------------------------------------------------------------------------------------------------------- |
+| `serverTarget` | `string`                                 |    -     | -       | Server target to run tunnel for.                                                                         |
+| `protocol`     | `http`, `tcp`, `tls`                     |    -     | `http`  | The tunnel protocol name. This defines the type of tunnel you would like to start.                       |
+| `address`      | `string`, `number`                       |    -     | -       | Forward traffic to this local port number or network address.                                            |
+| `auth`         | `string`                                 |    -     | -       | HTTP Basic authentication for tunnel.                                                                    |
+| `subdomain`    | `string`                                 |    -     | -       | Subdomain name to request. If unspecified, ngrok provides a unique subdomain based on your account type. |
+| `authToken`    | `string`                                 |    -     | -       | Specifies the authentication token (authtoken) used to connect to the ngrok service.                     |
+| `region`       | `us`, `eu`, `au`, `ap`, `sa`, `jp`, `in` |    -     | `us`    | Choose the region where the ngrok agent will connect to host its tunnels.                                |
+| `ngrokConfig`  | `string`                                 |    -     | `us`    | Custom path for ngrok config file.                                                                       |
+
+</details>
+
+<br/>
+
+## Examples
+
+| Name    | Path                                                                                          |
+| ------- | --------------------------------------------------------------------------------------------- |
+| nest    | [examples/nest](https://github.com/domjtalbot/nx-ngrok/tree/main/examples/nest)               |
+| nextjs  | [examples/nextjs](https://github.com/domjtalbot/nx-ngrok/tree/main/examples/nextjs)           |
+| nx-mesh | [examples/nx-mesh-app](https://github.com/domjtalbot/nx-ngrok/tree/main/examples/nx-mesh-app) |
 
 <br/>
 
@@ -79,6 +128,7 @@ This plugin wouldn't be possible without the great teams behind these projects:
 
 - [Ngrok](https://github.com/ngrok) - A simplified API-first ingress-as-a-service that adds connectivity,
   security, and observability to your apps in one line
+- [Ngrok Node API](https://github.com/bubenshchykov/ngrok) - A Node wrapper for Ngrok's API.
 - [Nrwl](https://github.com/nrwl) - The team behind [Nx](https://github.com/nrwl/nx)
 
 Please show them your support! ❤️

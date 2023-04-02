@@ -1,0 +1,55 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "version": 2,
+  "cli": "nx",
+  "title": "Start a new Ngrok tunnel.",
+  "description": "",
+  "type": "object",
+  "properties": {
+    "serverTarget": {
+      "type": "string",
+      "description": "Server target to run tunnel for."
+    },
+    "protocol": {
+      "type": "string",
+      "description": "The tunnel protocol name. This defines the type of tunnel you would like to start.",
+      "enum": ["http", "tcp", "tls"],
+      "default": "http"
+    },
+    "address": {
+      "type": "string",
+      "description": "Forward traffic to this local port number or network address.",
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "number"
+        }
+      ]
+    },
+    "auth": {
+      "type": "string",
+      "description": "HTTP Basic authentication for tunnel"
+    },
+    "subdomain": {
+      "type": "string",
+      "description": "Subdomain name to request. If unspecified, ngrok provides a unique subdomain based on your account type."
+    },
+    "authToken": {
+      "type": "string",
+      "description": "Specifies the authentication token (authtoken) used to connect to the ngrok service."
+    },
+    "region": {
+      "type": "string",
+      "description": "Choose the region where the ngrok agent will connect to host its tunnels.",
+      "enum": ["us", "eu", "au", "ap", "sa", "jp", "in"],
+      "default": "us"
+    },
+    "ngrokConfig": {
+      "type": "string",
+      "description": "Custom path for ngrok config file."
+    }
+  },
+  "required": []
+}
