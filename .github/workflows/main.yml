@@ -31,7 +31,7 @@ jobs:
       matrix:
         node_version: ['lts/*', latest]
     with:
-      affected: true
+      affected: false
       node_version: ${{ matrix.node_version }}
       save_cache: ${{ matrix.node_version == 'latest' }}
 
@@ -44,7 +44,7 @@ jobs:
       matrix:
         node_version: ['lts/*', latest]
     with:
-      affected: true
+      affected: false
       node_version: ${{ matrix.node_version }}
 
   e2e:
@@ -56,7 +56,7 @@ jobs:
       matrix:
         node_version: ['lts/*', latest]
     with:
-      affected: true
+      affected: false
       node_version: ${{ matrix.node_version }}
 
   # code-analysis:
