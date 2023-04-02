@@ -88,6 +88,16 @@
           "packages/nx-ngrok/executors.json",
           "packages/nx-ngrok/package.json"
         ]
+      },
+      "configurations": {
+        "codeql": {
+          "format": "@microsoft/eslint-formatter-sarif",
+          "outputFile": "reports/packages/nx-ngrok/lint.sarif"
+        },
+        "reports": {
+          "format": "json",
+          "outputFile": "reports/packages/nx-ngrok/lint.json"
+        }
       }
     },
     "test": {
