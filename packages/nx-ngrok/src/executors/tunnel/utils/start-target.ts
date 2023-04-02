@@ -8,7 +8,6 @@ export async function* startTarget(
   options: TunnelExecutorSchema,
   context: ExecutorContext
 ) {
-  // no dev server, return the provisioned base url
   if (!options.serverTarget) {
     yield { baseUrl: undefined };
 
@@ -20,13 +19,11 @@ export async function* startTarget(
     context.projectGraph
   );
 
-  const overrides: Record<string, unknown> = {};
-
   for await (const output of await runExecutor<{
     success: boolean;
     baseUrl?: string;
     info?: { port: number; baseUrl?: string };
-  }>(parsedDevServerTarget, overrides, context)) {
+  }>(parsedDevServerTarget, {}, context)) {
     if (!output.success) throw new Error('Could not start target');
 
     if (
@@ -40,7 +37,6 @@ export async function* startTarget(
 
     yield {
       baseUrl: options.address || output.baseUrl || output.info?.baseUrl,
-      success: output.success,
     };
   }
 }
