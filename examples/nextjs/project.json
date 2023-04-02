@@ -22,8 +22,7 @@
     "dev": {
       "executor": "nx-ngrok:tunnel",
       "options": {
-        "serverTarget": "examples-nextjs:serve:development",
-        "ngrokConfig": "examples/nextjs/ngrok.yml"
+        "serverTarget": "examples-nextjs:serve:development"
       },
       "configurations": {
         "production": {

@@ -25,6 +25,8 @@
 
 - [Features](#features)
 - [Installing](#installing)
+- [Getting Started](#getting-started)
+  - [Supported Environment Variables](#supported-environment-variables)
 - [Executors](#executors)
   - [`tunnel`](#tunnel)
 - [Examples](#examples)
@@ -66,6 +68,24 @@ yarn add -D nx-ngrok
 ```
 
 </details>
+
+<br/>
+
+## Getting Started
+
+Before you can serve HTML content, Ngrok requires you to [sign up for a free ngrok account](https://dashboard.ngrok.com/signup) to get an authtoken.
+
+It is recommended to follow Ngrok's documentation and [install your authtoken](https://dashboard.ngrok.com/get-started/your-authtoken).
+
+Alternatively, you can set the authtoken via an Environment Variable or as an option in each executor.
+
+> **Warning**
+>
+> Keep your authoken private and safe. Do not commit it to git!
+
+### Supported Environment Variables
+
+- `NGROK_AUTHTOKEN`: Specifies the authentication token ([authtoken](https://dashboard.ngrok.com/get-started/your-authtoken)) used to connect to the ngrok service.
 
 <br/>
 

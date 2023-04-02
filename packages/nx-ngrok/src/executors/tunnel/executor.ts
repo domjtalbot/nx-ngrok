@@ -15,6 +15,9 @@ export async function* tunnelExecutor(
   let webInterfaceUrl: string | undefined;
   let success: boolean | undefined;
 
+  const authtoken =
+    options.authToken ?? process.env['NGROK_AUTHTOKEN'] ?? undefined;
+
   for await (const serverValues of startTarget(options, context)) {
     logger.info(' ');
     logger.info(' ');
@@ -24,7 +27,7 @@ export async function* tunnelExecutor(
       tunnelUrl = await ngrok.connect({
         addr: serverValues.baseUrl,
         auth: options.auth,
-        authtoken: options.authToken,
+        authtoken,
         configPath: options.ngrokConfig,
         proto: options.protocol,
         region: options.region,
