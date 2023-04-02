@@ -83,6 +83,8 @@ Alternatively, you can set the authtoken via an Environment Variable or as an op
 >
 > Keep your authoken private and safe. Do not commit it to git!
 
+<br/>
+
 ### Supported Environment Variables
 
 - `NGROK_AUTHTOKEN` - Specifies the authentication token ([authtoken](https://dashboard.ngrok.com/get-started/your-authtoken)) used to connect to the ngrok service.
