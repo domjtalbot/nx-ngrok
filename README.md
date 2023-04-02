@@ -50,7 +50,7 @@ pnpm add -D nx-ngrok
 ```
 
 <details>
-  <summary>Using [npm](https://npmjs.com):</summary>
+  <summary>Using npm</summary>
 
 ```bash
 npm install -D nx-ngrok
@@ -59,7 +59,7 @@ npm install -D nx-ngrok
 </details>
 
 <details>
-  <summary>Using [yarn](http://yarnpkg.com):</summary>
+  <summary>Using yarn</summary>
 
 ```bash
 yarn add -D nx-ngrok
@@ -87,7 +87,7 @@ Start a new Ngrok tunnel.
 ```
 
 <details>
-  <summary>`tunnel` executor options</summary>
+  <summary>tunnel executor options</summary>
 
 | Name           | Type                                     | Required | Default | Description                                                                                              |
 | -------------- | ---------------------------------------- | :------: | ------- | -------------------------------------------------------------------------------------------------------- |
