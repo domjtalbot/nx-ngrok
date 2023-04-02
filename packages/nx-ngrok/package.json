@@ -10,7 +10,9 @@
   "peerDependencies": {
     "nx": ">=15.7.1"
   },
-  "dependencies": {},
+  "dependencies": {
+    "@nrwl/devkit": "^15.7.1"
+  },
   "keywords": [
     "CLI",
     "Monorepo",

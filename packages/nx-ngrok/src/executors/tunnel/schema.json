@@ -1,0 +1,55 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "version": 2,
+  "cli": "nx",
+  "title": "Tunnel executor",
+  "description": "",
+  "type": "object",
+  "properties": {
+    "serverTarget": {
+      "type": "string",
+      "description": "Server target to run tunnel for."
+    },
+    "protocol": {
+      "type": "string",
+      "description": "Extra args when starting the app.",
+      "enum": ["http", "tcp", "tls"],
+      "default": "http"
+    },
+    "address": {
+      "type": "string",
+      "description": "Port or network address to redirect traffic on.",
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "number"
+        }
+      ]
+    },
+    "auth": {
+      "type": "string",
+      "description": "HTTP Basic authentication for tunnel"
+    },
+    "subdomain": {
+      "type": "string",
+      "description": "Reserved tunnel name"
+    },
+    "authToken": {
+      "type": "string",
+      "description": "Your authtoken from ngrok.com"
+    },
+    "region": {
+      "type": "string",
+      "description": "One of ngrok regions.",
+      "enum": ["us", "eu", "au", "ap", "sa", "jp", "in"],
+      "default": "us"
+    },
+    "ngrokConfig": {
+      "type": "string",
+      "description": "Custom path for ngrok config file."
+    }
+  },
+  "required": []
+}
