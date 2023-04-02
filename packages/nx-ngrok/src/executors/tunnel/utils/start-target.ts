@@ -9,7 +9,7 @@ export async function* startTarget(
   context: ExecutorContext
 ) {
   if (!options.serverTarget) {
-    yield { baseUrl: undefined };
+    yield { baseUrl: options.address ?? undefined };
 
     return;
   }

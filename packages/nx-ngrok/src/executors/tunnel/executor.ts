@@ -21,8 +21,6 @@ export async function* tunnelExecutor(
     logger.info(`[ ${chalk.yellow.bold('ngrok')} ]`);
 
     try {
-      console.log('serverValues', serverValues);
-
       tunnelUrl = await ngrok.connect({
         addr: serverValues.baseUrl,
         auth: options.auth,
@@ -62,6 +60,11 @@ export async function* tunnelExecutor(
   await new Promise<{ success: boolean }>(() => {
     // This Promise intentionally never resolves, leaving the process running.
   });
+
+  return {
+    baseUrl: tunnelUrl,
+    success,
+  };
 }
 
 export default tunnelExecutor;
