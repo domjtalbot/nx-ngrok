@@ -24,7 +24,6 @@ jobs:
 
   build:
     needs: [lint]
-    if: needs.lint.outputs.hasAffected == 'true'
     uses: ./.github/workflows/__build.yml
     secrets: inherit
     strategy:
@@ -37,7 +36,6 @@ jobs:
 
   test:
     needs: [lint, build]
-    if: needs.lint.outputs.hasAffected == 'true'
     uses: ./.github/workflows/__test.yml
     secrets: inherit
     strategy:
@@ -49,7 +47,6 @@ jobs:
 
   e2e:
     needs: [lint, build]
-    if: needs.lint.outputs.hasAffectedApps == 'true'
     uses: ./.github/workflows/__e2e.yml
     secrets: inherit
     strategy:
