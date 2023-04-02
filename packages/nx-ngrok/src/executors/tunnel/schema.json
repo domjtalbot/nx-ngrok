@@ -2,7 +2,7 @@
   "$schema": "http://json-schema.org/schema",
   "version": 2,
   "cli": "nx",
-  "title": "Tunnel executor",
+  "title": "Start a new Ngrok tunnel.",
   "description": "",
   "type": "object",
   "properties": {
@@ -12,13 +12,13 @@
     },
     "protocol": {
       "type": "string",
-      "description": "Extra args when starting the app.",
+      "description": "The tunnel protocol name. This defines the type of tunnel you would like to start.",
       "enum": ["http", "tcp", "tls"],
       "default": "http"
     },
     "address": {
       "type": "string",
-      "description": "Port or network address to redirect traffic on.",
+      "description": "Forward traffic to this local port number or network address.",
       "oneOf": [
         {
           "type": "string"
@@ -34,15 +34,15 @@
     },
     "subdomain": {
       "type": "string",
-      "description": "Reserved tunnel name"
+      "description": "Subdomain name to request. If unspecified, ngrok provides a unique subdomain based on your account type."
     },
     "authToken": {
       "type": "string",
-      "description": "Your authtoken from ngrok.com"
+      "description": "Specifies the authentication token (authtoken) used to connect to the ngrok service."
     },
     "region": {
       "type": "string",
-      "description": "One of ngrok regions.",
+      "description": "Choose the region where the ngrok agent will connect to host its tunnels.",
       "enum": ["us", "eu", "au", "ap", "sa", "jp", "in"],
       "default": "us"
     },
