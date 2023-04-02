@@ -59,11 +59,11 @@ jobs:
       affected: false
       node_version: ${{ matrix.node_version }}
 
-  # code-analysis:
-  #   needs: [lint, build, test, e2e]
-  #   name: Code Analysis
-  #   uses: ./.github/workflows/code-analysis.yml
-  #   secrets: inherit
+  code-analysis:
+    needs: [lint, build, test, e2e]
+    name: Code Analysis
+    uses: ./.github/workflows/code-analysis.yml
+    secrets: inherit
 
   changesets:
     needs: [lint, build, test, e2e]
