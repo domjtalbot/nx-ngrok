@@ -13,12 +13,13 @@
     "test": "nx run-many --target=test --all"
   },
   "engines": {
-    "pnpm": ">=7"
+    "pnpm": ">=8"
   },
   "private": true,
   "dependencies": {
     "@nrwl/devkit": "15.7.1"
   },
+  "packageManager": "pnpm@8.0.0",
   "devDependencies": {
     "@babel/preset-react": "^7.14.5",
     "@changesets/changelog-github": "^0.4.8",
