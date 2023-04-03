@@ -81,7 +81,7 @@ Alternatively, you can set the authtoken via an Environment Variable or as an op
 
 > **Warning**
 >
-> Keep your authoken private and safe. Do not commit it to git!
+> Keep your authtoken private and safe. Do not commit it to git!
 
 <br/>
 
@@ -120,7 +120,7 @@ Start a new Ngrok tunnel.
 | `subdomain`    | `string`                                 |    -     | -       | Subdomain name to request. If unspecified, ngrok provides a unique subdomain based on your account type. |
 | `authToken`    | `string`                                 |    -     | -       | Specifies the authentication token (authtoken) used to connect to the ngrok service.                     |
 | `region`       | `us`, `eu`, `au`, `ap`, `sa`, `jp`, `in` |    -     | `us`    | Choose the region where the ngrok agent will connect to host its tunnels.                                |
-| `ngrokConfig`  | `string`                                 |    -     | `us`    | Custom path for ngrok config file.                                                                       |
+| `ngrokConfig`  | `string`                                 |    -     | -       | Custom path for ngrok config file.                                                                       |
 
 </details>
 
@@ -140,7 +140,7 @@ Start a new Ngrok tunnel.
 
 | `nx-ngrok` | Nx        |
 | ---------- | --------- |
-| `^0.0.0`   | `^15.7.1` |
+| `^1.0.0`   | `^15.7.1` |
 
 <br/>
 
