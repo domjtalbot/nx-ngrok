@@ -2,5 +2,11 @@
   "$schema": "http://json-schema.org/schema",
   "name": "nx-ngrok",
   "version": "0.0.0",
-  "generators": {}
+  "generators": {
+    "tunnel": {
+      "factory": "./src/generators/tunnel/tunnel",
+      "schema": "./src/generators/tunnel/schema.json",
+      "description": "Generate a target to run a Ngrok tunnel for a local server."
+    }
+  }
 }

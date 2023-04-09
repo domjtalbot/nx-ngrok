@@ -29,7 +29,7 @@
         "additionalEntryPoints": [
           "packages/nx-ngrok/src/executors/tunnel/executor.ts"
         ],
-        "external": ["@nrwl/devkit"],
+        "external": ["@nrwl/devkit", "ngrok"],
         "assets": [
           {
             "input": ".",

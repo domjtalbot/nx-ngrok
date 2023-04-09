@@ -11,7 +11,8 @@
     "nx": ">=15.7.1"
   },
   "dependencies": {
-    "@nrwl/devkit": "^15.7.1"
+    "@nrwl/devkit": "^15.7.1",
+    "ngrok": "4.3.3"
   },
   "keywords": [
     "CLI",

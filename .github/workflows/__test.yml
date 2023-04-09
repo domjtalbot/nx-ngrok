@@ -78,4 +78,4 @@ jobs:
             --target=test \
             --parallel=3 \
             --all \
-            --configuration=reports
+            --configuration=ci
