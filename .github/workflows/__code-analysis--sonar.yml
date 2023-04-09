@@ -43,7 +43,7 @@ jobs:
             --target=test \
             --parallel=3 \
             --all \
-            --configuration=reports
+            --configuration=ci
 
       - name: Get Nx-ngrok version
         id: version
