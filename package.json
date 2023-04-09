@@ -17,7 +17,8 @@
   },
   "private": true,
   "dependencies": {
-    "@nrwl/devkit": "15.7.1"
+    "@nrwl/devkit": "15.7.1",
+    "ngrok": "4.3.3"
   },
   "packageManager": "pnpm@8.0.0",
   "devDependencies": {
@@ -86,7 +87,6 @@
     "kill-port": "2.0.1",
     "lint-staged": "^13.2.0",
     "next": "13.1.1",
-    "ngrok": "^4.3.3",
     "nx-mesh": "4.0.0-next-20230320174438",
     "nx": "15.7.1",
     "prettier": "^2.6.2",
