@@ -18,7 +18,7 @@ jobs:
     uses: ./.github/workflows/__lint.yml
     secrets: inherit
     with:
-      affected: true
+      affected: false
       node_version: 'lts/*'
       save_cache: true
 
