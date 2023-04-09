@@ -4,9 +4,9 @@
   "version": "0.0.0",
   "generators": {
     "tunnel": {
-      "factory": "./src/generators/tunnel/generator",
+      "factory": "./src/generators/tunnel/tunnel",
       "schema": "./src/generators/tunnel/schema.json",
-      "description": "Generate a target to run a tunnel for a local server."
+      "description": "Generate a target to run a Ngrok tunnel for a local server."
     }
   }
 }

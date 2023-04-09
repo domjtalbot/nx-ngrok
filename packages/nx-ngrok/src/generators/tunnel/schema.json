@@ -2,27 +2,67 @@
   "$schema": "http://json-schema.org/schema",
   "cli": "nx",
   "$id": "Tunnel",
-  "title": "",
+  "title": "Generate a target to run a Ngrok tunnel for a local server.",
+  "description": "Generate a target to run a Ngrok tunnel for a local server.",
   "type": "object",
+  "examples": [
+    {
+      "command": "nx g nx-ngrok:tunnel dev --project my-app --serverTarget 'my-app:serve'",
+      "description": "Add the `dev` target to `my-app`"
+    }
+  ],
   "properties": {
     "name": {
       "type": "string",
-      "description": "",
+      "description": "Target name.",
       "$default": {
         "$source": "argv",
         "index": 0
       },
-      "x-prompt": "What name would you like to use?"
+      "x-prompt": "What name would you like to use to invoke the command?"
     },
-    "tags": {
+    "project": {
+      "description": "Project name.",
       "type": "string",
-      "description": "Add tags to the project (used for linting)",
-      "alias": "t"
+      "x-prompt": "What project does the target belong to?",
+      "x-dropdown": "projects"
     },
-    "directory": {
+    "serverTarget": {
       "type": "string",
-      "description": "A directory where the project is placed"
+      "description": "Server target to run tunnel for.",
+      "x-priority": "important"
+    },
+    "protocol": {
+      "type": "string",
+      "description": "The tunnel protocol name. This defines the type of tunnel you would like to start.",
+      "enum": ["http", "tcp", "tls"]
+    },
+    "address": {
+      "type": "string",
+      "description": "Forward traffic to this local port number or network address.",
+      "x-priority": "important",
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "number"
+        }
+      ]
+    },
+    "auth": {
+      "type": "string",
+      "description": "HTTP Basic authentication for tunnel"
+    },
+    "subdomain": {
+      "type": "string",
+      "description": "Subdomain name to request. If unspecified, ngrok provides a unique subdomain based on your account type."
+    },
+    "region": {
+      "type": "string",
+      "description": "Choose the region where the ngrok agent will connect to host its tunnels.",
+      "enum": ["us", "eu", "au", "ap", "sa", "jp", "in"]
     }
   },
-  "required": ["name"]
+  "required": ["name", "project"]
 }

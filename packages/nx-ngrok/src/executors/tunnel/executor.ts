@@ -21,32 +21,44 @@ export async function* tunnelExecutor(
   for await (const serverValues of startTarget(options, context)) {
     logger.info(' ');
     logger.info(' ');
-    logger.info(`[ ${chalk.yellow.bold('ngrok')} ]`);
+
+    const ngrokConfig = {
+      addr: serverValues.baseUrl,
+      auth: options.auth,
+      authtoken,
+      configPath: options.ngrokConfig,
+      proto: options.protocol,
+      region: options.region,
+      subdomain: options.subdomain,
+      // onLogEvent: (log) => {
+      //   logger.debug(chalk.dim(`${chalk.yellow('ngrok')} - log - ${log}`));
+      // },
+    };
+
+    Object.keys(ngrokConfig).forEach(
+      (key) => ngrokConfig[key] === undefined && delete ngrokConfig[key]
+    );
 
     try {
-      tunnelUrl = await ngrok.connect({
-        addr: serverValues.baseUrl,
-        auth: options.auth,
-        authtoken,
-        configPath: options.ngrokConfig,
-        proto: options.protocol,
-        region: options.region,
-        subdomain: options.subdomain,
-        // onLogEvent: (log) => {
-        //   logger.debug(chalk.dim(`${chalk.yellow('ngrok')} - log - ${log}`));
-        // },
-      });
+      const version = await ngrok.getVersion(ngrokConfig);
+
+      logger.info(
+        `[ ${chalk.yellow.bold(`ngrok`)} ${chalk.yellow.dim(version)} ]`
+      );
+
+      tunnelUrl = await ngrok.connect(ngrokConfig);
 
       webInterfaceUrl = ngrok.getUrl();
 
       success = true;
 
       logger.info(`${chalk.yellow('tunnel')} - ${tunnelUrl}`);
+
       logger.info(
         chalk.dim(`${chalk.yellow('web interface')} - ${webInterfaceUrl}`)
       );
     } catch (error) {
-      logger.error(error.message);
+      logger.error(`nx-ngrok:tunnel - error - ${error?.message}`);
 
       success = false;
     }
@@ -55,14 +67,26 @@ export async function* tunnelExecutor(
     logger.info(' ');
   }
 
+  process.on('exit', async () => {
+    await ngrok.disconnect();
+    await ngrok.kill();
+  });
+
+  process.on('SIGTERM', async () => {
+    await ngrok.disconnect();
+    await ngrok.kill();
+  });
+
   yield {
     baseUrl: tunnelUrl,
     success,
   };
 
-  await new Promise<{ success: boolean }>(() => {
-    // This Promise intentionally never resolves, leaving the process running.
-  });
+  if (success) {
+    await new Promise<{ success: boolean }>(() => {
+      // This Promise intentionally never resolves, leaving the process running.
+    });
+  }
 
   return {
     baseUrl: tunnelUrl,
