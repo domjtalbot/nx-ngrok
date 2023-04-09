@@ -1,5 +1,11 @@
 # nx-ngrok
 
+## 1.1.0
+
+### Minor Changes
+
+- [#7](https://github.com/domjtalbot/nx-ngrok/pull/7) [`6a31df6`](https://github.com/domjtalbot/nx-ngrok/commit/6a31df632f66bf274da95f9d94732ac00ae9dbb6) Thanks [@domjtalbot](https://github.com/domjtalbot)! - Add tunnel generator
+
 ## 1.0.0
 
 ### Major Changes
