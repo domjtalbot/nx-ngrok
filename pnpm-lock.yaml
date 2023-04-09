@@ -39,6 +39,9 @@ importers:
       '@graphql-typed-document-node/core':
         specifier: 3.1.2
         version: 3.1.2(graphql@16.6.0)
+      '@microsoft/eslint-formatter-sarif':
+        specifier: 3.0.0
+        version: 3.0.0
       '@nestjs/common':
         specifier: ^9.0.0
         version: 9.0.0(reflect-metadata@0.1.13)(rxjs@7.8.0)
@@ -3783,6 +3786,18 @@ packages:
       fs-extra: 8.1.0
       globby: 11.1.0
       read-yaml-file: 1.1.0
+    dev: true
+
+  /@microsoft/eslint-formatter-sarif@3.0.0:
+    resolution: {integrity: sha512-KIKkT44hEqCzqxODYwFMUvYEK0CrdHx/Ll9xiOWgFbBSRuzbxmVy4d/tzfgoucGz72HJZNOMjuyzFTBKntRK5Q==}
+    engines: {node: '>= 14'}
+    dependencies:
+      eslint: 8.15.0
+      jschardet: 3.0.0
+      lodash: 4.17.21
+      utf8: 3.0.0
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /@nestjs/common@9.0.0(reflect-metadata@0.1.13)(rxjs@7.8.0):
@@ -11605,6 +11620,11 @@ packages:
 
   /jsc-android@250231.0.0:
     resolution: {integrity: sha512-rS46PvsjYmdmuz1OAWXY/1kCYG7pnf1TBqeTiOJr1iDz7s5DLxxC9n/ZMknLDxzYzNVfI7R95MH10emSSG1Wuw==}
+    dev: true
+
+  /jschardet@3.0.0:
+    resolution: {integrity: sha512-lJH6tJ77V8Nzd5QWRkFYCLc13a3vADkh3r/Fi8HupZGWk2OVVDfnZP8V/VgQgZ+lzW0kG2UGb5hFgt3V3ndotQ==}
+    engines: {node: '>=0.1.90'}
     dev: true
 
   /jscodeshift@0.13.1(@babel/preset-env@7.20.2):
