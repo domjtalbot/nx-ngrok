@@ -1,8 +1,8 @@
-<!-- ![Nx Ngrok. Ngrok for Nx](https://github.com/domjtalbot/nx-ngrok/raw/main/.github/banner.jpg) -->
+<!-- omit in toc -->
 
-<h1 align="center">Nx Ngrok</h1>
+# ![nx–ngrok — Secure tunnels for your targets.](https://github.com/domjtalbot/nx-ngrok/raw/main/.github/banner-3.png 'nx–ngrok — Secure tunnels for your targets.')
 
-<p align="center"><a href="https://ngrok.com/">Ngrok</a> support for <a href="http://nx.dev">Nx</a>.</p>
+<br/>
 
 <div align="center">
   <p dir="auto">
@@ -20,6 +20,8 @@
     </a>
   </p>
 </div>
+
+<br/>
 
 ## Contents
 
