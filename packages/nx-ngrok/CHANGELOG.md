@@ -1,5 +1,15 @@
 # nx-ngrok
 
+## 1.2.0
+
+### Minor Changes
+
+- [#11](https://github.com/domjtalbot/nx-ngrok/pull/11) [`75af6f3`](https://github.com/domjtalbot/nx-ngrok/commit/75af6f3dc852d822dbad922764e41b84c758ae75) Thanks [@domjtalbot](https://github.com/domjtalbot)! - Add a setting for overriding the target port – either with a defined port number or a randomized port number.
+
+### Patch Changes
+
+- [#13](https://github.com/domjtalbot/nx-ngrok/pull/13) [`45dad63`](https://github.com/domjtalbot/nx-ngrok/commit/45dad634deb9e6229924ac7c97453683ffd56dc6) Thanks [@domjtalbot](https://github.com/domjtalbot)! - Rename "serverTarget" to "target"
+
 ## 1.1.0
 
 ### Minor Changes
