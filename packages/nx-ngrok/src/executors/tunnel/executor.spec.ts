@@ -85,9 +85,9 @@ describe('tunnel Executor', () => {
     );
   });
 
-  it('should get baseUrl from the serverTarget', async () => {
+  it('should get baseUrl from the target', async () => {
     const tunnel = await tunnelExecutor(
-      { serverTarget: 'myapp:serve' },
+      { target: 'myapp:serve' },
       mockContext
     ).next();
 

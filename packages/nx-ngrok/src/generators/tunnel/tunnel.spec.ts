@@ -16,7 +16,7 @@ describe('tunnel', () => {
     await tunnelGenerator(tree, {
       name: 'dev',
       project: 'my-lib',
-      serverTarget: 'my-lib:serve',
+      target: 'my-lib:serve',
     });
 
     const customTarget = readProjectConfiguration(tree, 'my-lib').targets.dev;
@@ -24,7 +24,7 @@ describe('tunnel', () => {
     expect(customTarget).toEqual({
       executor: 'nx-ngrok:tunnel',
       options: {
-        serverTarget: 'my-lib:serve',
+        target: 'my-lib:serve',
       },
     });
   });
@@ -69,7 +69,7 @@ describe('tunnel', () => {
       name: 'dev',
       port: 3000,
       project: 'my-lib',
-      serverTarget: 'example:serve',
+      target: 'example:serve',
     });
 
     const customTarget = readProjectConfiguration(tree, 'my-lib').targets.dev;
@@ -78,7 +78,7 @@ describe('tunnel', () => {
       executor: 'nx-ngrok:tunnel',
       options: {
         port: 3000,
-        serverTarget: 'example:serve',
+        target: 'example:serve',
       },
     });
   });
@@ -94,7 +94,7 @@ describe('tunnel', () => {
       name: 'dev',
       port: 'auto',
       project: 'my-lib',
-      serverTarget: 'example:serve',
+      target: 'example:serve',
     });
 
     const customTarget = readProjectConfiguration(tree, 'my-lib').targets.dev;
@@ -103,7 +103,7 @@ describe('tunnel', () => {
       executor: 'nx-ngrok:tunnel',
       options: {
         port: 'auto',
-        serverTarget: 'example:serve',
+        target: 'example:serve',
       },
     });
   });

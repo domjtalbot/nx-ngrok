@@ -33,14 +33,14 @@ describe('test e2e', () => {
     );
 
     await runCli(
-      `pnpm nx generate nx-ngrok:tunnel dev --project=${appName} --serverTarget=${appName}:serve`,
+      `pnpm nx generate nx-ngrok:tunnel dev --project=${appName} --target=${appName}:serve`,
       { cwd: workspacePath }
     );
 
     const project = readJson(`apps/${appName}/project.json`);
 
     expect(project?.targets?.dev?.options).toEqual({
-      serverTarget: `${appName}:serve`,
+      target: `${appName}:serve`,
     });
   }, 120000);
 
@@ -53,7 +53,7 @@ describe('test e2e', () => {
     );
 
     await runCli(
-      `pnpm nx generate nx-ngrok:tunnel dev --project=${appName} --serverTarget=${appName}:serve`,
+      `pnpm nx generate nx-ngrok:tunnel dev --project=${appName} --target=${appName}:serve`,
       { cwd: workspacePath }
     );
 
@@ -79,7 +79,7 @@ describe('test e2e', () => {
     );
 
     await runCli(
-      `pnpm nx generate nx-ngrok:tunnel dev --project=${appName} --serverTarget=${appName}:serve --port=${port}`,
+      `pnpm nx generate nx-ngrok:tunnel dev --project=${appName} --target=${appName}:serve --port=${port}`,
       { cwd: workspacePath }
     );
 
@@ -104,7 +104,7 @@ describe('test e2e', () => {
     );
 
     await runCli(
-      `pnpm nx generate nx-ngrok:tunnel dev --project=${appName} --serverTarget=${appName}:serve --port=auto`,
+      `pnpm nx generate nx-ngrok:tunnel dev --project=${appName} --target=${appName}:serve --port=auto`,
       { cwd: workspacePath }
     );
 

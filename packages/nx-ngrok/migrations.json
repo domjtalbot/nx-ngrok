@@ -1,0 +1,10 @@
+{
+  "generators": {
+    "rename-servertarget-to-target": {
+      "version": "1.2.0",
+      "description": "Rename 'serverTarget' setting to 'target'",
+      "cli": "nx",
+      "implementation": "./src/migrations/1.2.0/rename-servertarget-to-target"
+    }
+  }
+}
