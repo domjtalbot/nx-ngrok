@@ -17,11 +17,11 @@
     "dev": {
       "executor": "nx-ngrok:tunnel",
       "options": {
-        "serverTarget": "examples-nx-mesh-app:serve:development"
+        "target": "examples-nx-mesh-app:serve:development"
       },
       "configurations": {
         "production": {
-          "serverTarget": "examples-nx-mesh-app:serve:production"
+          "target": "examples-nx-mesh-app:serve:production"
         }
       }
     },

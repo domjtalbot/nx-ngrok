@@ -7,7 +7,7 @@
   "type": "object",
   "examples": [
     {
-      "command": "nx g nx-ngrok:tunnel dev --project my-app --serverTarget 'my-app:serve'",
+      "command": "nx g nx-ngrok:tunnel dev --project my-app --target 'my-app:serve'",
       "description": "Add the `dev` target to `my-app`"
     }
   ],
@@ -23,7 +23,7 @@
     },
     "port": {
       "type": "string",
-      "description": "Override the serverTarget's port number — only supported if the serverTarget accepts a port setting.",
+      "description": "Override the target's port number — only supported if the target accepts a port setting.",
       "oneOf": [
         {
           "type": "string",
@@ -42,7 +42,7 @@
       "x-prompt": "What project does the target belong to?",
       "x-dropdown": "projects"
     },
-    "serverTarget": {
+    "target": {
       "type": "string",
       "description": "Server target to run tunnel for.",
       "x-priority": "important"

@@ -8,12 +8,12 @@
       "executor": "@nrwl/cypress:cypress",
       "options": {
         "cypressConfig": "examples/nextjs-e2e/cypress.config.ts",
-        "devServerTarget": "examples-nextjs:serve:development",
+        "devtarget": "examples-nextjs:serve:development",
         "testingType": "e2e"
       },
       "configurations": {
         "production": {
-          "devServerTarget": "examples-nextjs:serve:production"
+          "devtarget": "examples-nextjs:serve:production"
         }
       }
     },

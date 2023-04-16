@@ -19,14 +19,14 @@ export async function* startTarget(
     port = options.port;
   }
 
-  if (!options.serverTarget) {
+  if (!options.target) {
     yield { baseUrl: options.address ?? undefined };
 
     return;
   }
 
-  const parsedDevServerTarget = parseTargetString(
-    options.serverTarget,
+  const parsedDevtarget = parseTargetString(
+    options.target,
     context.projectGraph
   );
 
@@ -35,7 +35,7 @@ export async function* startTarget(
     baseUrl?: string;
     info?: { port: number; baseUrl?: string };
   }>(
-    parsedDevServerTarget,
+    parsedDevtarget,
     {
       port,
     },

@@ -6,13 +6,13 @@
   "description": "",
   "type": "object",
   "properties": {
-    "serverTarget": {
+    "target": {
       "type": "string",
       "description": "Server target to run tunnel for."
     },
     "port": {
       "type": "string",
-      "description": "Override the serverTarget's port number — only supported if the serverTarget accepts a port setting.",
+      "description": "Override the target's port number — only supported if the target accepts a port setting.",
       "oneOf": [
         {
           "type": "string",

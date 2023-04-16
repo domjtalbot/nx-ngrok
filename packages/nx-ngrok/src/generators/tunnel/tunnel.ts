@@ -23,7 +23,7 @@ export async function tunnelGenerator(
     port: undefined,
     protocol: config.protocol,
     region: config.region,
-    serverTarget: config.serverTarget,
+    target: config.target,
     subdomain: config.subdomain,
   };
 

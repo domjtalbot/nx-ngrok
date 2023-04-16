@@ -39,12 +39,12 @@
     "dev": {
       "executor": "nx-ngrok:tunnel",
       "options": {
-        "serverTarget": "examples-nest:serve:development",
+        "target": "examples-nest:serve:development",
         "address": 3333
       },
       "configurations": {
         "production": {
-          "serverTarget": "examples-nest:serve:production"
+          "target": "examples-nest:serve:production"
         }
       }
     },
