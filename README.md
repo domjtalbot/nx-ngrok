@@ -25,17 +25,18 @@
 
 ## Contents
 
-- [Features](#features)
-- [Installing](#installing)
-- [Getting Started](#getting-started)
-  - [Supported Environment Variables](#supported-environment-variables)
-- [Executors](#executors)
-  - [`tunnel`](#tunnel)
-- [Generators](#generators)
-  - [`tunnel`](#tunnel-1)
-- [Examples](#examples)
-- [Compatibility](#compatibility)
-- [Credits](#credits)
+- [](#)
+  - [Features](#features)
+  - [Installing](#installing)
+  - [Getting Started](#getting-started)
+    - [Supported Environment Variables](#supported-environment-variables)
+  - [Executors](#executors)
+    - [`tunnel`](#tunnel)
+  - [Generators](#generators)
+    - [`tunnel`](#tunnel-1)
+  - [Examples](#examples)
+  - [Compatibility](#compatibility)
+  - [Credits](#credits)
 
 <br/>
 
@@ -116,16 +117,17 @@ Start a new Ngrok tunnel.
 <details>
   <summary>tunnel executor options</summary>
 
-| Name           | Type                                     | Required | Default | Description                                                                                              |
-| -------------- | ---------------------------------------- | :------: | ------- | -------------------------------------------------------------------------------------------------------- |
-| `serverTarget` | `string`                                 |    -     | -       | Server target to run tunnel for.                                                                         |
-| `protocol`     | `http`, `tcp`, `tls`                     |    -     | `http`  | The tunnel protocol name. This defines the type of tunnel you would like to start.                       |
-| `address`      | `string`, `number`                       |    -     | -       | Forward traffic to this local port number or network address.                                            |
-| `auth`         | `string`                                 |    -     | -       | HTTP Basic authentication for tunnel.                                                                    |
-| `subdomain`    | `string`                                 |    -     | -       | Subdomain name to request. If unspecified, ngrok provides a unique subdomain based on your account type. |
-| `authToken`    | `string`                                 |    -     | -       | Specifies the authentication token (authtoken) used to connect to the ngrok service.                     |
-| `region`       | `us`, `eu`, `au`, `ap`, `sa`, `jp`, `in` |    -     | `us`    | Choose the region where the ngrok agent will connect to host its tunnels.                                |
-| `ngrokConfig`  | `string`                                 |    -     | -       | Custom path for ngrok config file.                                                                       |
+| Name           | Type                                     | Required | Default         | Description                                                                                              |
+| -------------- | ---------------------------------------- | :------: | --------------- | -------------------------------------------------------------------------------------------------------- |
+| `serverTarget` | `string`                                 |    -     | -               | Server target to run tunnel for.                                                                         |
+| `protocol`     | `http`, `tcp`, `tls`                     |    -     | `http`          | The tunnel protocol name. This defines the type of tunnel you would like to start.                       |
+| `address`      | `string`, `number`                       |    -     | -               | Forward traffic to this local port number or network address.                                            |
+| `auth`         | `string`                                 |    -     | -               | HTTP Basic authentication for tunnel.                                                                    |
+| `port`         | `targetDefault`, `auto`, `number`        |    -     | `targetDefault` | Override the serverTarget's port number — only supported if the serverTarget accepts a port setting.     |
+| `subdomain`    | `string`                                 |    -     | -               | Subdomain name to request. If unspecified, ngrok provides a unique subdomain based on your account type. |
+| `authToken`    | `string`                                 |    -     | -               | Specifies the authentication token (authtoken) used to connect to the ngrok service.                     |
+| `region`       | `us`, `eu`, `au`, `ap`, `sa`, `jp`, `in` |    -     | `us`            | Choose the region where the ngrok agent will connect to host its tunnels.                                |
+| `ngrokConfig`  | `string`                                 |    -     | -               | Custom path for ngrok config file.                                                                       |
 
 </details>
 
@@ -155,16 +157,17 @@ UPDATE apps/my-app/project.json
 <details>
   <summary>tunnel generator options</summary>
 
-| Name           | Alias | Type                                     | Required | Default | Description                                                                                              |
-| -------------- | ----- | ---------------------------------------- | :------: | ------- | -------------------------------------------------------------------------------------------------------- |
-| `name`         | -     | `string`                                 |    ✅    | -       | Target name.                                                                                             |
-| `project`      | -     | `string`                                 |    ✅    | -       | What project does the target belong to?                                                                  |
-| `serverTarget` | -     | `string`                                 |    -     | -       | Server target to run tunnel for.                                                                         |
-| `protocol`     | -     | `http`, `tcp`, `tls`                     |    -     | `http`  | The tunnel protocol name. This defines the type of tunnel you would like to start.                       |
-| `address`      | -     | `string`, `number`                       |    -     | -       | Forward traffic to this local port number or network address.                                            |
-| `auth`         | -     | `string`                                 |    -     | -       | HTTP Basic authentication for tunnel.                                                                    |
-| `subdomain`    | -     | `string`                                 |    -     | -       | Subdomain name to request. If unspecified, ngrok provides a unique subdomain based on your account type. |
-| `region`       | -     | `us`, `eu`, `au`, `ap`, `sa`, `jp`, `in` |    -     | `us`    | Choose the region where the ngrok agent will connect to host its tunnels.                                |
+| Name           | Alias                             | Type                                     |    Required     | Default                                                                                              | Description                                                                                              |
+| -------------- | --------------------------------- | ---------------------------------------- | :-------------: | ---------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| `name`         | -                                 | `string`                                 |       ✅        | -                                                                                                    | Target name.                                                                                             |
+| `project`      | -                                 | `string`                                 |       ✅        | -                                                                                                    | What project does the target belong to?                                                                  |
+| `serverTarget` | -                                 | `string`                                 |        -        | -                                                                                                    | Server target to run tunnel for.                                                                         |
+| `port`         | `targetDefault`, `auto`, `number` | -                                        | `targetDefault` | Override the serverTarget's port number — only supported if the serverTarget accepts a port setting. |
+| `protocol`     | -                                 | `http`, `tcp`, `tls`                     |        -        | `http`                                                                                               | The tunnel protocol name. This defines the type of tunnel you would like to start.                       |
+| `address`      | -                                 | `string`, `number`                       |        -        | -                                                                                                    | Forward traffic to this local port number or network address.                                            |
+| `auth`         | -                                 | `string`                                 |        -        | -                                                                                                    | HTTP Basic authentication for tunnel.                                                                    |
+| `subdomain`    | -                                 | `string`                                 |        -        | -                                                                                                    | Subdomain name to request. If unspecified, ngrok provides a unique subdomain based on your account type. |
+| `region`       | -                                 | `us`, `eu`, `au`, `ap`, `sa`, `jp`, `in` |        -        | `us`                                                                                                 | Choose the region where the ngrok agent will connect to host its tunnels.                                |
 
 </details>
 

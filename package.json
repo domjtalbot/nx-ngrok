@@ -79,6 +79,7 @@
     "eslint-plugin-react": "7.31.11",
     "eslint": "~8.15.0",
     "fs-extra": "11.1.1",
+    "get-port": "5.1.1",
     "graphql": "16.6.0",
     "husky": "^8.0.3",
     "jest-environment-jsdom": "28.1.1",

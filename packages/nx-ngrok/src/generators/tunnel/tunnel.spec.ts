@@ -57,4 +57,54 @@ describe('tunnel', () => {
       },
     });
   });
+
+  it('should generate a target with an overridden target port', async () => {
+    const tree = createTreeWithEmptyWorkspace({ layout: 'apps-libs' });
+
+    await libraryGenerator(tree, {
+      name: 'my-lib',
+    });
+
+    await tunnelGenerator(tree, {
+      name: 'dev',
+      port: 3000,
+      project: 'my-lib',
+      serverTarget: 'example:serve',
+    });
+
+    const customTarget = readProjectConfiguration(tree, 'my-lib').targets.dev;
+
+    expect(customTarget).toEqual({
+      executor: 'nx-ngrok:tunnel',
+      options: {
+        port: 3000,
+        serverTarget: 'example:serve',
+      },
+    });
+  });
+
+  it('should generate a target with an randomised overridden target port', async () => {
+    const tree = createTreeWithEmptyWorkspace({ layout: 'apps-libs' });
+
+    await libraryGenerator(tree, {
+      name: 'my-lib',
+    });
+
+    await tunnelGenerator(tree, {
+      name: 'dev',
+      port: 'auto',
+      project: 'my-lib',
+      serverTarget: 'example:serve',
+    });
+
+    const customTarget = readProjectConfiguration(tree, 'my-lib').targets.dev;
+
+    expect(customTarget).toEqual({
+      executor: 'nx-ngrok:tunnel',
+      options: {
+        port: 'auto',
+        serverTarget: 'example:serve',
+      },
+    });
+  });
 });

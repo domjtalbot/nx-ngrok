@@ -38,6 +38,5 @@
   },
   "exports": {
     "./package.json": "./package.json"
-  },
-  "type": "commonjs"
+  }
 }
