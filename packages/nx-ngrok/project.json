@@ -23,11 +23,14 @@
         "format": ["cjs"],
         "minify": true,
         "esbuildOptions": {
-          "outExtension": { ".js": ".js" }
+          "outExtension": {
+            ".js": ".js"
+          }
         },
         "sourcemap": true,
         "additionalEntryPoints": [
-          "packages/nx-ngrok/src/executors/tunnel/executor.ts"
+          "packages/nx-ngrok/src/executors/tunnel/executor.ts",
+          "packages/nx-ngrok/src/migrations/1.2.0/rename-servertarget-to-target"
         ],
         "external": ["@nrwl/devkit", "ngrok"],
         "assets": [
@@ -87,7 +90,8 @@
           "packages/nx-ngrok/**/*.ts",
           "packages/nx-ngrok/generators.json",
           "packages/nx-ngrok/executors.json",
-          "packages/nx-ngrok/package.json"
+          "packages/nx-ngrok/package.json",
+          "packages/nx-ngrok/migrations.json"
         ]
       },
       "configurations": {
