@@ -8,12 +8,12 @@
       "executor": "@nrwl/cypress:cypress",
       "options": {
         "cypressConfig": "examples/nx-mesh-app-e2e/cypress.config.ts",
-        "devtarget": "examples-nx-mesh-app:serve",
+        "devServerTarget": "examples-nx-mesh-app:serve",
         "testingType": "e2e"
       },
       "configurations": {
         "production": {
-          "devtarget": "examples-nx-mesh-app:serve:production"
+          "devServerTarget": "examples-nx-mesh-app:serve:production"
         }
       }
     },
