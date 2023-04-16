@@ -3,11 +3,22 @@ import type { ExecutorContext } from '@nrwl/devkit';
 import type { TunnelExecutorSchema } from '../schema';
 
 import { parseTargetString, runExecutor } from '@nrwl/devkit';
+import getPort from 'get-port';
 
 export async function* startTarget(
   options: TunnelExecutorSchema,
   context: ExecutorContext
 ) {
+  let port: number | undefined;
+
+  if (options.port === 'auto') {
+    port = await getPort();
+  }
+
+  if (typeof options.port === 'number') {
+    port = options.port;
+  }
+
   if (!options.serverTarget) {
     yield { baseUrl: options.address ?? undefined };
 
@@ -23,7 +34,13 @@ export async function* startTarget(
     success: boolean;
     baseUrl?: string;
     info?: { port: number; baseUrl?: string };
-  }>(parsedDevServerTarget, {}, context)) {
+  }>(
+    parsedDevServerTarget,
+    {
+      port,
+    },
+    context
+  )) {
     if (!output.success) throw new Error('Could not start target');
 
     if (

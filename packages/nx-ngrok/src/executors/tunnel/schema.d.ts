@@ -5,6 +5,7 @@ export interface TunnelExecutorSchema {
   auth?: string;
   authToken?: string;
   ngrokConfig?: string;
+  port?: 'targetDefault' | 'auto' | number;
   protocol?: Ngrok.Options['proto'];
   region?: Ngrok.Options['region'];
   serverTarget?: string;

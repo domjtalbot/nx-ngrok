@@ -22,7 +22,8 @@
     "dev": {
       "executor": "nx-ngrok:tunnel",
       "options": {
-        "serverTarget": "examples-nextjs:serve:development"
+        "serverTarget": "examples-nextjs:serve:development",
+        "port": 8000
       },
       "configurations": {
         "production": {

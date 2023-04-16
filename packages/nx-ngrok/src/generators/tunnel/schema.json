@@ -21,6 +21,21 @@
       },
       "x-prompt": "What name would you like to use to invoke the command?"
     },
+    "port": {
+      "type": "string",
+      "description": "Override the serverTarget's port number — only supported if the serverTarget accepts a port setting.",
+      "oneOf": [
+        {
+          "type": "string",
+          "enum": ["targetDefault", "auto"]
+        },
+        {
+          "type": "number"
+        }
+      ],
+      "default": "targetDefault",
+      "x-priority": "important"
+    },
     "project": {
       "description": "Project name.",
       "type": "string",

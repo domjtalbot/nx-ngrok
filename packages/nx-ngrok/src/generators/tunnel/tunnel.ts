@@ -20,11 +20,16 @@ export async function tunnelGenerator(
   const options = {
     address: config.address,
     auth: config.auth,
+    port: undefined,
     protocol: config.protocol,
     region: config.region,
     serverTarget: config.serverTarget,
     subdomain: config.subdomain,
   };
+
+  if (config.port === 'auto' || typeof config.port === 'number') {
+    options.port = config.port;
+  }
 
   Object.keys(options).forEach(
     (key) => options[key] === undefined && delete options[key]

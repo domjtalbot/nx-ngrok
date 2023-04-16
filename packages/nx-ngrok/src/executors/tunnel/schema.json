@@ -10,6 +10,20 @@
       "type": "string",
       "description": "Server target to run tunnel for."
     },
+    "port": {
+      "type": "string",
+      "description": "Override the serverTarget's port number — only supported if the serverTarget accepts a port setting.",
+      "oneOf": [
+        {
+          "type": "string",
+          "enum": ["targetDefault", "auto"]
+        },
+        {
+          "type": "number"
+        }
+      ],
+      "default": "targetDefault"
+    },
     "protocol": {
       "type": "string",
       "description": "The tunnel protocol name. This defines the type of tunnel you would like to start.",
