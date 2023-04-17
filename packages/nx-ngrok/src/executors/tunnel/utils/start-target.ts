@@ -30,6 +30,10 @@ export async function* startTarget(
     context.projectGraph
   );
 
+  process.env.NX_TASK_TARGET_PROJECT = parsedDevtarget.project;
+  process.env.NX_TASK_TARGET_TARGET = parsedDevtarget.target;
+  process.env.NX_TASK_TARGET_CONFIGURATION = parsedDevtarget.configuration;
+
   for await (const output of await runExecutor<{
     success: boolean;
     baseUrl?: string;
