@@ -1,5 +1,11 @@
 # nx-ngrok
 
+## 1.2.1
+
+### Patch Changes
+
+- [#15](https://github.com/domjtalbot/nx-ngrok/pull/15) [`7c2a173`](https://github.com/domjtalbot/nx-ngrok/commit/7c2a173731b7209a3d6ddb9c0937cfc905b7ab90) Thanks [@domjtalbot](https://github.com/domjtalbot)! - Fix tunnel executor failing on 15.9.2 with Next.js
+
 ## 1.2.0
 
 ### Minor Changes
